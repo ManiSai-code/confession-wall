@@ -37,7 +37,15 @@ app.post('/api/confessions', async (req, res) => {
     await newMessage.save();
     res.json(newMessage);
 });
+// ... existing code ...
 
+// 6. SERVE THE FRONTEND (Add this block)
+const path = require('path');
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// app.listen is below...
 // 5. START SERVER
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
