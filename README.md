@@ -3,7 +3,7 @@
 A Full-Stack anonymous messaging platform where users can post secrets to a public wall. Data is persisted in the cloud using MongoDB.
 
 **🔗 Live Demo:** [https://confession-wall-manisai.onrender.com/](https://confession-wall-manisai.onrender.com/)
-*(Replace with your actual Render link)*
+*(Takes 10 seconds to load sometimes)*
 
 ---
 
