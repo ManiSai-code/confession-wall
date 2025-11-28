@@ -44,12 +44,16 @@
             const data = await res.json();
             
             const wall = document.getElementById('wall');
-            wall.innerHTML = data.map(msg => `
-                <div class="note">
-                    "${msg.text}"
-                    <span class="timestamp">${new Date(msg.date).toLocaleString()}</span>
-                </div>
-            `).join('');
+           // Inside loadMessages()...
+wall.innerHTML = data.map(msg => `
+    <div class="note">
+        <div style="display:flex; justify-content:space-between;">
+            <span>"${msg.text}"</span>
+            <button onclick="deleteConfession('${msg._id}')" style="background:none; color:red; border:none; width:auto; padding:0; cursor:pointer;">✖</button>
+        </div>
+        <span class="timestamp">${new Date(msg.date).toLocaleString()}</span>
+    </div>
+`).join('');
         }
 
         // 2. POST MESSAGE
@@ -68,9 +72,19 @@
             input.value = ''; // Clear box
             loadMessages(); // Reload wall
         }
+async function deleteConfession(id) {
+    // Optional: Ask for confirmation so users don't delete by accident
+    if(!confirm("Delete this secret?")) return;
 
+    // Send the DELETE command to the server
+    await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+    });
+
+    loadMessages(); // Refresh the wall
+}
         // Run on load
         loadMessages();
     </script>
 </body>
-</html>
+</html> 

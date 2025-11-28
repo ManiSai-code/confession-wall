@@ -46,6 +46,15 @@ app.get('/', (req, res) => {
 });
 
 // app.listen is below...
+// DELETE: Remove a specific confession by ID
+app.delete('/api/confessions/:id', async (req, res) => {
+    try {
+        await Confession.findByIdAndDelete(req.params.id);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: "Could not delete" });
+    }
+});
 // 5. START SERVER
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
